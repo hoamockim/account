@@ -1,4 +1,4 @@
-ARG GO_VERSION=1.16
+ARG GO_VERSION=1.18
 
 FROM golang:${GO_VERSION}-alpine as builder
 
@@ -7,7 +7,7 @@ RUN echo $SERVICE_NAME
 
 RUN apk add make
 
-WORKDIR ./src/account/
+WORKDIR ./src/github.com/tipee/account
 COPY . .
 
 RUN make update && \

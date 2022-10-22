@@ -3,12 +3,13 @@ package service
 import (
 	"crypto/rsa"
 	"errors"
+	"io/ioutil"
+	"time"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/tipee/account/app/dto"
 	"github.com/tipee/account/pkg/configs"
 	"github.com/tipee/account/pkg/util"
-	"io/ioutil"
-	"time"
 )
 
 type AuthService interface {
