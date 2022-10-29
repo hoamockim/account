@@ -16,10 +16,6 @@ type ModelMetadata interface {
 	GetTableName() string
 }
 
-type ModelCache interface {
-	IsCached() bool
-}
-
 const (
 	DataInvalid string = "data is invalid"
 )

@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/tipee/account/app/dto"
-	"github.com/tipee/account/app/service"
+	"github.com/tipee/account/app/services"
 	"github.com/tipee/account/pkg/errors"
 )
 
@@ -24,15 +24,15 @@ const (
 	AUTH    = "auth"
 )
 
-var authService service.AuthService
+var authService services.AuthService
 var userService interface {
-	service.CommandUserService
-	service.QueryUserService
+	services.CommandUserService
+	services.QueryUserService
 }
 
 func init() {
-	authService = service.GetAuthService()
-	userService = service.GetUserService()
+	authService = services.GetAuthService()
+	userService = services.GetUserService()
 }
 
 func success(ctx *gin.Context, data interface{}) {

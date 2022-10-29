@@ -8,7 +8,7 @@ type UserAttributeRepository interface {
 	GetUserAttribute(userId int) (*models.UserAttribute, error)
 }
 
-func (repo repository) GetUserAttribute(userId int) (*models.UserAttribute, error) {
+func (repo repo) GetUserAttribute(userId int) (*models.UserAttribute, error) {
 	var entity models.UserAttribute
 	err := repo.getById(&entity, userId)
 	if err != nil {

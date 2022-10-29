@@ -17,6 +17,10 @@ type configValidate interface {
 	isValid() bool
 }
 
+func InitConfig() {
+	//TODO: init config from env
+}
+
 func (cfg *appConfig) isValid() bool {
 	return cfg.MySql.isValid()
 }

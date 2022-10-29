@@ -1,7 +1,8 @@
-package service
+package services
 
 import (
 	"errors"
+
 	"github.com/tipee/account/app/dto"
 	"github.com/tipee/account/db/models"
 	"github.com/tipee/account/db/repositories"

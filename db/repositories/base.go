@@ -1,12 +1,20 @@
 package repositories
 
 import (
+	"github.com/jinzhu/gorm"
 	"github.com/tipee/account/db"
 	"github.com/tipee/account/db/models"
 )
 
-type repository struct {
-}
+type (
+	repo struct {
+		database *gorm.DB
+	}
+
+	//default repository
+	Repository interface {
+	}
+)
 
 //FilterField is used for where clause
 type FilterField struct {
@@ -17,30 +25,29 @@ type FilterField struct {
 	condition string // =, !=, >=, <=, >, <
 }
 
-var repo repository
-
-func New() *repository {
-	return &repo
+func New(db *gorm.DB) *repo {
+	return &repo{
+		database: db,
+	}
 }
 
 //save
-func (repo *repository) save(data interface {
+func (repo *repo) save(data interface {
 	models.ModelCredential
 	models.ModelMetadata
 }) error {
-	return db.Save(data.GetTableName(), data)
+	return db.Save(repo.database, data)
 }
 
 //getById
-func (repo *repository) getById(data interface {
+func (repo *repo) getById(data interface {
 	models.ModelMetadata
-	models.ModelCache
 }, id int) error {
-	return db.GetById(id, data.GetTableName(), data)
+	return db.GetById(repo.database, id, data)
 }
 
 //update
-func (repo *repository) update(data interface {
+func (repo *repo) update(data interface {
 	models.ModelCredential
 	models.ModelMetadata
 }, filter ...FilterField) error {
@@ -51,14 +58,13 @@ func (repo *repository) update(data interface {
 			conditions[key] = val.Value
 		}
 	}
-	return db.Update(data.GetTableName(), data, conditions)
+	return db.Update(repo.database, data, conditions)
 }
 
 //filter
-func (repo *repository) filter(data interface {
+func (repo *repo) filter(data interface {
 	models.ModelMetadata
-	models.ModelCache
-}, entities interface{}, filter ...FilterField) error {
+}, filter ...FilterField) (interface{}, error) {
 	var conditions = make(map[string]interface{})
 	if len(filter) > 0 {
 		for _, val := range filter {
@@ -66,5 +72,5 @@ func (repo *repository) filter(data interface {
 			conditions[key] = val.Value
 		}
 	}
-	return db.Filter(data.GetTableName(), entities, conditions)
+	return db.Filter(repo.database, data, conditions)
 }

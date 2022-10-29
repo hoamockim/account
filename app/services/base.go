@@ -1,4 +1,4 @@
-package service
+package services
 
 import (
 	"github.com/tipee/account/db/repositories"
@@ -11,24 +11,20 @@ type Instance struct {
 	}
 }
 
-var userService interface {
-	QueryUserService
-	CommandUserService
-}
-
-var srv *Instance
-
-func init() {
-	initService(repositories.New())
-	//initJwtParse()
-}
+var (
+	srv         *Instance
+	userService interface {
+		QueryUserService
+		CommandUserService
+	}
+)
 
 // initService
-func initService(userInterface interface {
+func InitService(userRepos interface {
 	repositories.UserInfoRepository
 	repositories.UserAttributeRepository
 }) {
-	srv = &Instance{UserRepo: userInterface}
+	srv = &Instance{UserRepo: userRepos}
 }
 
 // GetUserService get user service

@@ -31,9 +31,8 @@ type UserInfoRepository interface {
 	SaveUserInfo(userInfo *models.UserInfo) error
 }
 
-func (repo *repository) GetUserInfo(usf *UserFilter) (userInfo models.UserInfo, err error) {
+func (repo *repo) GetUserInfo(usf *UserFilter) (userInfo models.UserInfo, err error) {
 	var filter []FilterField
-	var userInfos []*models.UserInfo
 
 	switch usf.InputType {
 	case IdType:
@@ -50,14 +49,12 @@ func (repo *repository) GetUserInfo(usf *UserFilter) (userInfo models.UserInfo, 
 	default:
 		return userInfo, errors.New("input type is invalid")
 	}
-	err = repo.filter(&userInfo, &userInfos, filter...)
-	if len(userInfos) > 0 {
-		userInfo = *userInfos[0]
-	}
+
+	//TODO: call filter
 	return
 }
 
-func (repo *repository) SaveUserInfo(userInfo *models.UserInfo) error {
+func (repo *repo) SaveUserInfo(userInfo *models.UserInfo) error {
 	if !userInfo.Validate() {
 		return errors.New(models.DataInvalid)
 	}

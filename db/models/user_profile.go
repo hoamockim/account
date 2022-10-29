@@ -33,7 +33,3 @@ func (user *UserInfo) Validate() bool {
 func (user *UserInfo) GetTableName() string {
 	return tblUserInfo
 }
-
-func (user *UserInfo) IsCached() bool {
-	return true
-}
