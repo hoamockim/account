@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tipee/account/app/dto"
 	"github.com/tipee/account/app/services"
 	"github.com/tipee/account/pkg/errors"
 )
@@ -16,7 +15,7 @@ type Meta struct {
 
 type BaseResponse struct {
 	Meta Meta        `json:"meta"`
-	Data interface{} `json:"data"`
+	Data interface{} `json:"data,omitempty"`
 }
 
 const (
@@ -36,7 +35,12 @@ func init() {
 }
 
 func success(ctx *gin.Context, data interface{}) {
-	res := &dto.ResData{Data: data}
+	res := &BaseResponse{
+		Meta: Meta{
+			Code:    "200",
+			Message: "success",
+		},
+	}
 	ctx.JSON(http.StatusOK, res)
 }
 

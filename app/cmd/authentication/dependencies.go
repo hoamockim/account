@@ -1,4 +1,4 @@
-package auth
+package authentication
 
 import (
 	service "github.com/tipee/account/app/services"

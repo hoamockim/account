@@ -17,7 +17,7 @@ pipeline {
 
         stage("build") {
             when {
-                branch 'master'
+                branch 'develop'
             }
            steps {
                 sh 'docker build . -t account:latest --build-arg SERVICE_NAME=profile'
@@ -35,3 +35,9 @@ pipeline {
         }
     }
 }
+
+/*
+    - run pipeline with when conditionn -> branch
+    - agent Docker, Unitest
+    - Intergration with Sonaquer, selenium, K6
+*/

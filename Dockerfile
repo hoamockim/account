@@ -7,7 +7,7 @@ RUN echo $SERVICE_NAME
 
 RUN apk add make
 
-WORKDIR ./src/github.com/tipee/account
+WORKDIR ./src/tipee/$SERVICE_NAME
 COPY . .
 
 RUN make update && \

@@ -9,8 +9,8 @@ update:
 all:
 	make build && make run internal
 build:
-	$(GOBUILD) -v -ldflags="-extldflags=-static" -o $(SERVICE_NAME) app/cmd/$(SERVICE_NAME)/*.go
+	$(GOBUILD) -v -ldflags="-extldflags=-static" -o $(SERVICE_NAME) app/cmd/main.go
 test:
 	$(GOTEST) -v ./...  -covermode=count -coverprofile=sample.cov
-run:
-	./$(SERVICE_NAME)
+run $(app):
+	./$(SERVICE_NAME) $(app)
