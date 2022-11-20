@@ -11,5 +11,6 @@ const (
 )
 
 const (
-	Panicked ErrorCode = "PANICKED"
+	Panicked   ErrorCode = "PANICKED"
+	OffService ErrorCode = "TURNOFF"
 )

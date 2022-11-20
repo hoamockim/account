@@ -9,9 +9,13 @@ type ClientInfo struct {
 }
 
 type ErrResponse struct {
+	Message string `json: "message"`
 }
 
-func HandlerErr(requestId string, request *http.Request, errCode ErrorCode, clientInfo *ClientInfo) (code int, res *ErrResponse) {
+func HandlerErr(requestId string, request *http.Request, errCode ErrorCode, clientInfo *ClientInfo) (res *ErrResponse) {
 	//TODO: log,
+	res = &ErrResponse{
+		Message: string(errCode),
+	}
 	return
 }

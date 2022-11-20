@@ -25,6 +25,7 @@ func New() *gorm.DB {
 	if err = client.DB().Ping(); err != nil {
 		panic(err)
 	}
+
 	return client
 }
 
